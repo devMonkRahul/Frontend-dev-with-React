@@ -1,8 +1,11 @@
 import AddTodo from "./components/AddTodo";
-import React from "react";
+import React, { useState } from "react";
 import Todos from "./components/Todos";
 
 function App() {
+
+  const [currentInput, setCurrentInput] = useState({id: "", title: ""});
+
   return (
     <>
       <div className="bg-[#172842] min-h-screen py-8">
@@ -11,10 +14,10 @@ function App() {
             Manage Your Todos
           </h1>
           <div className="mb-4">
-            <AddTodo />
+            <AddTodo currentInput={currentInput} setCurrentInput={setCurrentInput}/>
           </div>
           <div className="flex flex-wrap gap-y-3">
-            <Todos />
+            <Todos setCurrentInput={setCurrentInput}/>
           </div>
         </div>
       </div>
