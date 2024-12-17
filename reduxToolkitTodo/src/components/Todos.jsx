@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo } from "../features/todo/todoSlice";
+import { removeTodo, toggleTodo } from "../features/todo/todoSlice";
 
 export default function Todos({ setCurrentInput }) {
   const todos = useSelector((state) => state.todos);
@@ -15,12 +15,43 @@ export default function Todos({ setCurrentInput }) {
             key={todo.id}
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
           >
-            <div className="text-white w-full">{todo.title}</div>
+            {/* Todo CheckBox */}
+            <div
+              onClick={() => dispatch(toggleTodo(todo.id))}
+              className="cursor-pointer w-12 h-8 flex justify-center items-center border-2 border-gray-400 rounded-lg transition-all duration-300 mr-4"
+              style={{
+                backgroundColor: todo.completed ? "#22c55e" : "transparent",
+                borderColor: todo.completed ? "#22c55e" : "#d1d5db",
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`w-5 h-5 text-white transition-transform duration-300 ${
+                  todo.completed ? "scale-100" : "scale-0"
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            {/* Todo Title */}
+            <div 
+              className={`text-white w-full ${todo.completed ? "line-through" : ""}`}
+            >{todo.title}</div>
 
             {/* Edit Button */}
             <button
+              disabled={todo.completed}
               onClick={() => setCurrentInput({ id: todo.id, title: todo.title })}
-              className="text-white bg-yellow-500 border-0 py-1 px-4 focus:outline-none hover:bg-yellow-600 rounded text-md mx-2"
+              className="text-white bg-yellow-500 border-0 py-1 px-4 focus:outline-none hover:bg-yellow-600 rounded text-md mx-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
