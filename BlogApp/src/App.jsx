@@ -1,4 +1,3 @@
-import config from "./conf/conf";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth"
