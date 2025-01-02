@@ -6,6 +6,8 @@ import LogoutBtn from "./Header/LogoutBtn";
 import Button from "./Button/Button";
 import Input from "./Input/Input";
 import Select from "./Select/Select";
+import Card from "./Card/Card";
+import Login from "./Login/Login";
 
 export { 
     Header, 
@@ -15,5 +17,7 @@ export {
     LogoutBtn,
     Button,
     Input,
-    Select
+    Select,
+    Card,
+    Login,
 };
