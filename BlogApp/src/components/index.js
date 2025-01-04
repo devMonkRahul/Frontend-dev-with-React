@@ -8,6 +8,8 @@ import Input from "./Input/Input";
 import Select from "./Select/Select";
 import Card from "./Card/Card";
 import Login from "./Login/Login";
+import Signup from "./Signup/Signup";
+import AuthLayout from "./AuthLayout/AuthLayout";
 
 export { 
     Header, 
@@ -20,4 +22,6 @@ export {
     Select,
     Card,
     Login,
+    Signup,
+    AuthLayout,
 };
