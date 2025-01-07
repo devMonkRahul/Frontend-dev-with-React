@@ -10,6 +10,8 @@ import Card from "./Card/Card";
 import Login from "./Login/Login";
 import Signup from "./Signup/Signup";
 import AuthLayout from "./AuthLayout/AuthLayout";
+import RTE from "./RTE/RTE";
+import PostForm from "./PostForm/PostForm";
 
 export { 
     Header, 
@@ -24,4 +26,6 @@ export {
     Login,
     Signup,
     AuthLayout,
+    RTE,
+    PostForm
 };
