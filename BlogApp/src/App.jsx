@@ -28,7 +28,7 @@ function App() {
           <Header />
           <main>
             {/* <Outlet /> */}
-            TODO: Add routes
+            {/* TODO: Add routes */}
           </main>
           <Footer />
         </div>
