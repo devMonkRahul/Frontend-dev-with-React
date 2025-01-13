@@ -11,14 +11,14 @@ export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
-            slug: post?.slug || "",
+            slug: post?.$id || "",
             content: post?.content || "",
             status: post?.status || "active",
         }
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.auth.userData)
+    const userData = useSelector(state => state.auth.userData.userData)    
 
     const submit = async (data) => {
         if (post) {
@@ -59,8 +59,8 @@ export default function PostForm({ post }) {
             return value
                 .trim()
                 .toLowerCase()
-                .replace(/^[a-zA-Z\d\s]+/g, '-')
-                .replace(/ \s/g, '-')
+                .replace(/[^a-zA-Z\d\s]+/g, '-')
+                .replace(/\s/g, '-')
         }
 
         return ""

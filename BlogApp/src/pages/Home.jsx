@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import appwriteService from '../appwrite/config'
 import { Card, Container } from '../components'
+import { useSelector } from 'react-redux'
 
 function Home() {
 
     const [posts, setPosts] = useState([])
+    const userLoggedIn = useSelector(state => state.auth.status)
 
     useEffect(() => {
-        appwriteService.getPosts()
-        .then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-            }
-        })
+        if (userLoggedIn) {
+            appwriteService.getPosts()
+            .then((posts) => {
+                if (posts) {
+                    setPosts(posts.documents)
+                }
+            })
+        }
     }, [])
 
     if (posts.length === 0) {

@@ -1,25 +1,36 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authService from "./appwrite/auth"
 import { login, logout } from "./store/features/authSlice"
 import { Footer, Header } from "./components";
+import { Outlet, useNavigate } from "react-router-dom";
+import { set } from "react-hook-form";
 
 function App() {  
 
   const [ loading, setLoading ] = useState(true);
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth.status);  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    authService.getCurrentUser()
-      .then((userData) => {
-        if (userData) {
-          dispatch(login({ userData }));
-        } else {
-          dispatch(logout());
-        }
-      })
-      .finally(() => { setLoading(false) });
-  }, []);
+    try {
+      authService.getCurrentUser()
+        .then((userData) => {
+          if (userData) {
+            dispatch(login({ userData }));
+          } else {
+            dispatch(logout());
+          }
+        })
+        // .finally(() => { setLoading(false) });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  }, [dispatch]);
 
   return !loading ? (
     <>
@@ -27,8 +38,7 @@ function App() {
         <div className="w-full block">
           <Header />
           <main>
-            {/* <Outlet /> */}
-            {/* TODO: Add routes */}
+            TODO: <Outlet />
           </main>
           <Footer />
         </div>

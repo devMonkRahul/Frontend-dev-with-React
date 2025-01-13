@@ -17,7 +17,6 @@ export default function Post() {
     const isAuthor = post && userData ? post.userId === userData.$id : false
 
     useEffect(() => {
-        if (slug) {
             appwriteService.getPost(slug)
                 .then((post) => {
                     if (post) {
@@ -26,9 +25,6 @@ export default function Post() {
                         navigate('/')
                     }
                 })
-        } else {
-            navigate('/')
-        }
     }, [slug, navigate])
 
     const deletePost = () => {
@@ -53,7 +49,7 @@ export default function Post() {
 
                 { isAuthor && (
                     <div className='absolute right-6 top-6'>
-                        <Link to={`/edit/${post.$id}`}>
+                        <Link to={`/edit-post/${post.$id}`}>
                             <Button
                                 bgColor='bg-green-500'
                                 className='mr-3'
