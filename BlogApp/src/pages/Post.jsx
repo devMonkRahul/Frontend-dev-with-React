@@ -40,12 +40,6 @@ export default function Post() {
             })
     }
 
-    console.log("Post Data", post);
-    console.log("User Data", userData?.userData.$id);
-    console.log("IsAuthor", isAuthor);
-
-    
-
   return post && userData ? (
     <div className='py-8'>
         <Container>
