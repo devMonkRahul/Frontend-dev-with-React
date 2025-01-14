@@ -9,23 +9,26 @@ import { useSelector } from 'react-redux'
 export default function Post() {
 
     const [post, setPost] = useState(null)
+    // const [isAuthor, setIsAuthor] = useState(false)
     const { slug } = useParams()
     const navigate = useNavigate()
 
     const userData = useSelector((state) => state.auth.userData)
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false
+    const isAuthor = post && userData ? post?.userId === userData?.userData.$id : false
 
     useEffect(() => {
             appwriteService.getPost(slug)
                 .then((post) => {
                     if (post) {
                         setPost(post)
+                        // if (userData)
+                        //     setIsAuthor(post.userId === userData.$id)
                     } else {
                         navigate('/')
                     }
                 })
-    }, [slug, navigate])
+    }, [])
 
     const deletePost = () => {
         appwriteService.deletePost(post.$id)
@@ -37,7 +40,13 @@ export default function Post() {
             })
     }
 
-  return post ? (
+    console.log("Post Data", post);
+    console.log("User Data", userData?.userData.$id);
+    console.log("IsAuthor", isAuthor);
+
+    
+
+  return post && userData ? (
     <div className='py-8'>
         <Container>
             <div className='w-full flex justify-center mb-4 relative border rounded-xl p-2'>
